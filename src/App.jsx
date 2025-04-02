@@ -1,33 +1,47 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import AccordianList from './Components/AccordionList'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [listData, setListData] = useState([
+    {
+      id: 1,
+      title: "What is React?",
+      content: "React is a JavaScript library for building user interfaces."
+    },
+    {
+      id: 2,
+      title: "What is a component?",
+      content: "Components are the building blocks of a React application."
+    },
+    {
+      id: 3,
+      title: "What is state?",
+      content: "State is a built-in object that stores property values that belong to a component."
+    },
+    {
+      id: 4,
+      title: "What is a prop?",
+      content: "Props are inputs to components used to pass data and event handlers."
+    },
+    {
+      id: 5,
+      title: "What is JSX?",
+      content: "JSX is a syntax extension for JavaScript that looks similar to HTML."
+    }
+  ])
+  const [expandedItem, setExpandedItem] = useState(null) 
+  
+  function toggleShow(id) {
+    setExpandedItem(prev => (prev === id ? null : id))
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <h1>Accordian List</h1>
+    <div className="list-container">
+      <AccordianList listData={listData} toggleShow={toggleShow} expandedItem={expandedItem} />
+    </div>
     </>
   )
 }
